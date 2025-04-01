@@ -1,0 +1,21 @@
+# База данных
+db.sqlite3
+*.sqlite3
+
+# Медиа-файлы
+media/
+staticfiles/
+
+# Файлы IDE
+.idea/
+.vscode/
+__pycache__/
+*.py[cod]
+*.swp
+
+# Временные файлы
+*.log
+*.pot
+*.pyc
+.env
+.env.local

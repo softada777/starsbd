@@ -1,0 +1,104 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'>
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <style>
+        /* Горизонтальное меню (как в первом варианте) */
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: auto;
+        }
+
+        .logo-img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links i {
+            margin-right: 5px;
+        }
+
+        /* Центрирование контента */
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Стили для контента */
+        .features {
+            width: 100%;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+        }
+
+        .birthday-celebrity, .celebrity-list {
+            margin: 20px 0;
+        }
+
+        ul {
+            text-align: center;
+            list-style-position: inside;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="{% static 'main/img/25AA9382-4E34-403F-BAEF-E7EBB4C2009A_1_105_c.jpeg' %}" alt="Лого" class="logo-img">
+            <span class='logo'>softada</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{% url 'index' %}"><i class="fa-solid fa-house"></i>Главная</a></li>
+            <li><a href="{% url 'about' %}"><i class="fa-solid fa-address-card"></i>Про меня</a></li>
+            <li><a href=""><i class="fa-solid fa-address-book"></i>Контакты</a></li>
+            <li><a href="{% url 'add_star' %}"><i class="fa-solid fa-address-book"></i>Добавить знаменитость</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,96 @@
+/* Основные стили */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5; /* Светло-серый фон */
+    color: #333; /* Темный текст для контраста */
+}
+
+/* Навигационная панель */
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff; /* Белый фон меню */
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Основной контент */
+.main-content {
+    flex: 1;
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff; /* Белый фон контента */
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+/* Карточки знаменитостей */
+.celebrity-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 25px 0;
+    border: 1px solid #eee;
+}
+
+.celebrity-name {
+    color: #2c3e50;
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.celebrity-detail {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.celebrity-detail strong {
+    color: #7f8c8d;
+}
+
+/* Разделители */
+.divider {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 30px 0;
+}
+
+/* Заголовки */
+h1 {
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #34495e;
+    font-size: 24px;
+    margin: 30px 0 20px;
+}
+
+/* Навигационные ссылки */
+.nav-links a {
+    color: #34495e;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
