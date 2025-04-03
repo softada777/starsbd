@@ -1,0 +1,73 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Все знаменитости</h1>
+
+    <!-- Алфавитный указатель в одну строку -->
+    <div class="alphabet-nav mb-4 d-flex flex-wrap" style="gap: 5px;">
+        {% for letter in 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯ' %}
+            {% if stars|filter_by_first_letter:letter %}
+                <a href="{% url 'sitemap_letter' letter=letter %}"
+                   class="btn btn-sm btn-outline-primary">
+                    {{ letter }}
+                </a>
+            {% else %}
+                <span class="btn btn-sm btn-outline-secondary"
+                      style="cursor: default; opacity: 0.6;">
+                    {{ letter }}
+                </span>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Список знаменитостей -->
+    <div class="celebrity-list">
+        {% for star in stars %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3 class="h5">{{ star.name }}</h3>
+                <p class="mb-1"><strong>Дата рождения:</strong> {{ star.birth_date|date:"d.m.Y" }}</p>
+                <p class="mb-1"><strong>Страна:</strong> {{ star.country.name }}</p>
+                <p class="mb-1"><strong>Вид деятельности:</strong> {{ star.category.title }}</p>
+                {% if star.content %}
+                <p class="mt-2">{{ star.content }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">
+            На данный момент в базе нет ни одной знаменитости.
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Блок стран и категорий -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="h5">Страны</h3>
+                    <ul class="list-unstyled">
+                        {% for country in star_countries %}
+                        <li>{{ country.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="h5">Виды деятельности</h3>
+                    <ul class="list-unstyled">
+                        {% for category in star_categories %}
+                        <li>{{ category.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

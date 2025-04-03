@@ -12,4 +12,6 @@ urlpatterns = [
     # Знаменитости по виду деятельности
     path('industry/<slug:slug>/', views.stars_by_category, name='stars_by_category'),
     path('add/', views.add_star, name='add_star'),
+    path('sitemap/', views.sitemap, name='sitemap'),
+    path('sitemap/<str:letter>/', views.sitemap_letter, name='sitemap_letter'),
 ]

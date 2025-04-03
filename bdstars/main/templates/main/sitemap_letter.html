@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Знаменитости на букву {{ current_letter }}</h1>
+
+    <!-- Алфавитный указатель в одну строку -->
+    <div class="alphabet-nav mb-4 d-flex flex-wrap" style="gap: 5px;">
+        {% for letter in 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯ' %}
+            {% if stars|filter_by_first_letter:letter %}
+                <a href="{% url 'sitemap_letter' letter=letter %}"
+                   class="btn btn-sm {% if letter == current_letter %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                    {{ letter }}
+                </a>
+            {% else %}
+                <span class="btn btn-sm btn-outline-secondary"
+                      style="cursor: default; opacity: 0.6;">
+                    {{ letter }}
+                </span>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Кнопка "Все знаменитости" -->
+    <div class="mb-4">
+        <a href="{% url 'sitemap' %}" class="btn btn-outline-secondary">
+            <i class="fas fa-list"></i> Все знаменитости
+        </a>
+    </div>
+
+    <!-- Список знаменитостей на букву -->
+    <div class="celebrity-list">
+        {% for star in stars %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3 class="h5">{{ star.name }}</h3>
+                <p class="mb-1"><strong>Дата рождения:</strong> {{ star.birth_date|date:"d.m.Y" }}</p>
+                <p class="mb-1"><strong>Страна:</strong> {{ star.country.name }}</p>
+                <p class="mb-1"><strong>Вид деятельности:</strong> {{ star.category.title }}</p>
+                {% if star.content %}
+                <p class="mt-2">{{ star.content }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">
+            На букву "{{ current_letter }}" знаменитостей пока нет :)
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
