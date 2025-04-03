@@ -159,21 +159,76 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
-/* Добавьте в main.css */
-.alphabet-nav {
-    overflow-x: auto;
-    white-space: nowrap;
-    padding-bottom: 10px;
-}
-
-.alphabet-nav .btn {
-    display: inline-block;
-    float: none;
-    margin-right: 3px;
-    margin-bottom: 5px;
-}
 
 .celebrity-list .card {
     border: none;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Стили для карточки умершей звезды */
+.star-deceased {
+    position: relative;
+    border-left: 4px solid #6c757d;
+}
+
+.star-deceased .card-header {
+    background-color: #f8f9fa;
+}
+
+.star-meta p {
+    margin-bottom: 0.8rem;
+}
+
+.bio {
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+/* Иконки в мета-данных */
+.star-meta strong i {
+    width: 1.5rem;
+    text-align: center;
+}
+
+/* Алфавитная навигация */
+.alphabet-scroll {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.alphabet-nav {
+    display: inline-flex;
+    gap: 5px;
+    min-width: max-content;
+}
+
+.alphabet-nav .btn {
+    min-width: 32px;
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+}
+
+.alphabet-nav .btn.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Карточки знаменитостей */
+.star-deceased {
+    opacity: 0.9;
+    border-left: 3px solid #6c757d;
+}
+
+.star-meta p {
+    margin-bottom: 0.5rem;
+}
+
+/* Адаптивность */
+@media (max-width: 576px) {
+    .alphabet-nav .btn {
+        min-width: 28px;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.8rem;
+    }
 }

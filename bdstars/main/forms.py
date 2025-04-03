@@ -13,7 +13,7 @@ class StarForm(forms.ModelForm):
 
     class Meta:
         model = Star
-        fields = ['name', 'country', 'category', 'birth_date', 'content', 'photo']
+        fields = ['name', 'country', 'category', 'birth_date', 'death_date', 'content', 'photo']
         widgets = {
             'name': forms.TextInput(),
             'country': forms.Select(),
@@ -24,6 +24,7 @@ class StarForm(forms.ModelForm):
             ),
             'content': forms.Textarea(attrs={'rows': 5}),
             'photo': forms.FileInput(),
+            'death_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
         }
         labels = {
             'name': 'Имя',
@@ -31,6 +32,7 @@ class StarForm(forms.ModelForm):
             'category': 'Категория',
             'birth_date': 'Дата рождения',
             'content': 'Описание',
+            'death_date': 'Дата смерти (необязательно)',
             'photo': 'Фотография'
         }
 
