@@ -2,6 +2,77 @@
 {% block title %}{{ title_template }} {{ country_name }} - Borntoday.ru{% endblock %}
 
 {% block content %}
+<style>
+    /* Добавьте эти стили в начало шаблона */
+    .star-card {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        border-left: 4px solid #0066cc;
+    }
+
+    .star-card h2 {
+        color: #333;
+        margin-top: 0;
+        font-size: 1.5rem;
+    }
+
+    .star-card p {
+        margin-bottom: 0.5rem;
+    }
+
+    .star-card strong {
+        color: #555;
+    }
+
+    hr {
+        border: 0;
+        height: 1px;
+        background: #eee;
+        margin: 20px 0;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    ul li {
+        background: #f0f0f0;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+
+    a {
+        color: #0066cc;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .btn-details {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 5px 15px;
+        background: #0066cc;
+        color: white;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+    .btn-details:hover {
+        background: #0055aa;
+        text-decoration: none;
+    }
+</style>
 <h4 class="mb-3">{{ title_template }}: {{ country_name }}</h4>
 {% if stars %}
  {% for star in stars %}

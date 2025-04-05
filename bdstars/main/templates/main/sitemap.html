@@ -1,73 +1,109 @@
 {% extends 'main/base.html' %}
+{% block title %}Карта сайта - Все знаменитости{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">Карта сайта - Все знаменитости</h1>
 
-    <!-- Алфавитный указатель -->
-    <div class="alphabet-scroll mb-4">
-        <div class="alphabet-nav">
-            {% for letter in 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯ' %}
-                {% if stars|filter_by_first_letter:letter %}
-                    <a href="{% url 'sitemap_letter' letter=letter %}"
-                       class="btn btn-sm btn-primary">
-                        {{ letter }}
-                    </a>
-                {% else %}
-                    <span class="btn btn-sm btn-primary disabled">
-                        {{ letter }}
-                    </span>
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
+<style>
+    /* Добавьте эти стили в начало шаблона */
+    .star-card {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        border-left: 4px solid #0066cc;
+    }
 
-    <!-- Список знаменитостей -->
-    <div class="celebrity-list">
-        {% for star in stars %}
-        <div class="card mb-3 {% if not star.is_alive %}star-deceased{% endif %}">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start">
-                    <h3 class="h5 mb-0">
-                        {{ star.name }}
-                        {% if not star.is_alive %}
-                            <span class="badge bg-dark ms-2">✝</span>
-                        {% endif %}
-                    </h3>
-                    <span class="badge bg-secondary">{{ star.country.name }}</span>
-                </div>
+    .star-card h2 {
+        color: #333;
+        margin-top: 0;
+        font-size: 1.5rem;
+    }
 
-                <div class="star-meta mt-2">
-                    <p class="mb-1">
-                        <strong>Дата рождения:</strong>
-                        {{ star.birth_date|date:"d.m.Y" }}
-                        <span class="text-muted ms-2">
-                            ({{ star.get_lifespan }})
-                        </span>
-                    </p>
+    .star-card p {
+        margin-bottom: 0.5rem;
+    }
 
-                    <p class="mb-1">
-                        <strong>Вид деятельности:</strong>
-                        {% for category in star.categories.all %}
-                            <span class="badge bg-light text-dark me-1">{{ category.title }}</span>
-                        {% endfor %}
-                    </p>
+    .star-card strong {
+        color: #555;
+    }
 
-                    {% if star.content %}
-                    <p class="mt-2 text-muted">{{ star.content|truncatewords:20 }}</p>
-                    {% endif %}
+    hr {
+        border: 0;
+        height: 1px;
+        background: #eee;
+        margin: 20px 0;
+    }
 
-                    <a href="{% url 'star_detail' slug=star.slug %}" class="btn btn-sm btn-outline-primary mt-2">
-                        Подробнее
-                    </a>
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <div class="alert alert-info">
-            На данный момент в базе нет ни одной знаменитости.
-        </div>
-        {% endfor %}
-    </div>
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    ul li {
+        background: #f0f0f0;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+
+    a {
+        color: #0066cc;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .btn-details {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 5px 15px;
+        background: #0066cc;
+        color: white;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+    .btn-details:hover {
+        background: #0055aa;
+        text-decoration: none;
+    }
+</style>
+
+<h1>Карта сайта - Все знаменитости</h1>
+
+{% for star in stars %}
+<div class="star-card">
+    <h2>{{ star.name }}</h2>
+    <p><strong>Дата рождения:</strong> {{ star.birth_date|date:"d.m.Y" }}</p>
+    <p>({{ star.get_lifespan }})</p>
+
+    <!-- Добавлен вывод категории -->
+    <p><strong>Вид деятельности:</strong> {{ star.category.title }}</p>
+
+    <p>{{ star.content|linebreaks }}</p>
+
+    <a href="{% url 'star_detail' star.slug %}">Подробнее</a>
 </div>
+<hr>
+{% endfor %}
+
+<h2>Страны</h2>
+<ul>
+    {% for country in countries %}
+    <li>{{ country.name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Виды деятельности</h2>
+<ul>
+    {% for category in categories %}
+    <li>{{ category.title }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}

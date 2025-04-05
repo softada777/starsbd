@@ -123,7 +123,7 @@ class Star(models.Model):
         """Возвращает строку с годами жизни в формате 'ГГГГ-ГГГГ' или 'ГГГГ-настоящее время'."""
         birth_year = self.birth_date.year
         if self.is_alive:
-            return f"{birth_year}-настоящее время"
+            return f"{birth_year} - настоящее время"
         return f"{birth_year}-{self.death_date.year}"
 
     def get_categories_display(self):
